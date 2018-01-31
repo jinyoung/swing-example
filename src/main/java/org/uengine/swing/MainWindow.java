@@ -31,8 +31,10 @@ public class MainWindow extends JFrame {
 
         fruitTableModel.setFruitList(fruitList);
 
+        final JTable table = new JTable(fruitTableModel);
 
-        getContentPane().add(new JScrollPane(new JTable(fruitTableModel)), BorderLayout.CENTER);
+
+        getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 
         JButton clickButton = new JButton("과일 추가");
         clickButton.addActionListener(new ActionListener() {
@@ -43,10 +45,22 @@ public class MainWindow extends JFrame {
                 fruit.setQty(1);
 
                 fruitList.add(fruit);
+
+                table.updateUI();
             }
         });
 
         getContentPane().add(clickButton, BorderLayout.SOUTH);
+
+        Category root = new Category("과일");
+        root.getSubCategories().add(new Category("수입"));
+
+        Category 국산 = new Category("국산");
+        root.getSubCategories().add(국산);
+
+        국산.getSubCategories().add(new Category("중국산"));
+
+        getContentPane().add(new JScrollPane(new JTree(new CategoryTreeModel(root))), BorderLayout.WEST);
     }
 
     public static void main(String args[]){

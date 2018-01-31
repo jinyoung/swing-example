@@ -9,6 +9,15 @@ public class Fruit {
     int qty;
     int price;
 
+    Category category;
+        public Category getCategory() {
+            return category;
+        }
+        public void setCategory(Category category) {
+            this.category = category;
+        }
+
+
     public String getName() {
         return name;
     }
