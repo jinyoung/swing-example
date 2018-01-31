@@ -34,8 +34,6 @@ public class MainWindow extends JFrame {
         final JTable table = new JTable(fruitTableModel);
 
 
-        getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
-
         JButton clickButton = new JButton("과일 추가");
         clickButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -60,7 +58,14 @@ public class MainWindow extends JFrame {
 
         국산.getSubCategories().add(new Category("중국산"));
 
-        getContentPane().add(new JScrollPane(new JTree(new CategoryTreeModel(root))), BorderLayout.WEST);
+        Component treePart = (new JScrollPane(new JTree(new CategoryTreeModel(root))));
+
+        JSplitPane jSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(table), treePart);
+
+
+        getContentPane().add(jSplitPane, BorderLayout.CENTER);
+
+
     }
 
     public static void main(String args[]){
