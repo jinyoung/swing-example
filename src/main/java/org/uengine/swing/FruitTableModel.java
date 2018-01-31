@@ -39,7 +39,7 @@ public class FruitTableModel implements TableModel {
     }
 
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
+        return true;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -51,7 +51,9 @@ public class FruitTableModel implements TableModel {
     }
 
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-
+        if(columnIndex==0) getFruitList().get(rowIndex).setName((String) aValue);
+        else if(columnIndex==1) getFruitList().get(rowIndex).setQty(Integer.valueOf(aValue.toString()).intValue());
+        else if(columnIndex==2) getFruitList().get(rowIndex).setPrice(Integer.valueOf(aValue.toString()).intValue());
     }
 
     public void addTableModelListener(TableModelListener l) {

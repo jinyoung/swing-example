@@ -2,6 +2,8 @@ package org.uengine.swing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,7 @@ public class MainWindow extends JFrame {
         getContentPane().add(new JLabel("Sample"), BorderLayout.NORTH);
 
         FruitTableModel fruitTableModel = new FruitTableModel();
-        java.util.List<Fruit> fruitList = new ArrayList<Fruit>();
+        final java.util.List<Fruit> fruitList = new ArrayList<Fruit>();
 
         Fruit fruit = new Fruit();
         fruit = new Fruit();
@@ -31,7 +33,20 @@ public class MainWindow extends JFrame {
 
 
         getContentPane().add(new JScrollPane(new JTable(fruitTableModel)), BorderLayout.CENTER);
-        getContentPane().add(new JButton("Click"), BorderLayout.SOUTH);
+
+        JButton clickButton = new JButton("과일 추가");
+        clickButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Fruit fruit = new Fruit();
+                fruit = new Fruit();
+                fruit.setName("새과일");
+                fruit.setQty(1);
+
+                fruitList.add(fruit);
+            }
+        });
+
+        getContentPane().add(clickButton, BorderLayout.SOUTH);
     }
 
     public static void main(String args[]){
